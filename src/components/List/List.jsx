@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -13,7 +13,6 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
@@ -23,6 +22,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+//Pagination Code
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -85,6 +85,7 @@ function TablePaginationActions(props) {
   );
 }
 
+//Checkbox Code
 const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: 3,
   width: 18,
@@ -149,6 +150,7 @@ function BpCheckbox(props) {
   );
 }
 
+//Table Format Code
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -241,6 +243,7 @@ function Row(props) {
   );
 }
 
+//Final Table
 export default function List({ data }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);

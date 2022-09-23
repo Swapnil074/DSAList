@@ -16,10 +16,32 @@ const Header = ({ list, data, setData, setSize, setCount, setCurrData }) => {
   let topicList = [];
   setData(temp[0]);
   useEffect(() => {
+    let tempData = [];
+    HandleFilter(tempData);
+    setCurrData(tempData);
+    setSize(tempData.length);
+    countAccepted(tempData);
+  }, [status, topic]);
+
+  useEffect(() => {
+    let tempData = [];
+    HandleTopicSearch(tempData);
+    setCurrData(tempData);
+    setSize(tempData.length);
+    countAccepted(tempData);
+  }, [search]);
+
+  useEffect(() => {
     setCurrData(data);
     setSize(data.length);
     countAccepted(data);
   }, [data]);
+
+  for (let i = 0; i < data.length; i++) {
+    if (!topicList.includes(data[i].topic) && data[i].topic.length > 0) {
+      topicList.push(data[i].topic);
+    }
+  }
 
   const countAccepted = (a) => {
     let count = 0;
@@ -72,27 +94,6 @@ const Header = ({ list, data, setData, setSize, setCount, setCurrData }) => {
     }
   };
 
-  useEffect(() => {
-    let tempData = [];
-    HandleFilter(tempData);
-    setCurrData(tempData);
-    setSize(tempData.length);
-    countAccepted(tempData);
-  }, [status, topic]);
-
-  useEffect(() => {
-    let tempData = [];
-    HandleTopicSearch(tempData);
-    setCurrData(tempData);
-    setSize(tempData.length);
-    countAccepted(tempData);
-  }, [search]);
-
-  for (let i = 0; i < data.length; i++) {
-    if (!topicList.includes(data[i].topic) && data[i].topic.length > 0) {
-      topicList.push(data[i].topic);
-    }
-  }
   const handleSearch = (e) => {
     if (e.target.firstChild == null) setSearch("");
     else setSearch(e.target.firstChild.data);
@@ -104,6 +105,7 @@ const Header = ({ list, data, setData, setSize, setCount, setCurrData }) => {
   const handleStatus = (e) => {
     setStatus(e.target.value);
   };
+
   return (
     <Stack
       direction="row"
